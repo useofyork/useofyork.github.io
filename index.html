@@ -2,118 +2,116 @@
 <html>
 <head>
 <style>
-body {
-  font-family: "Junicode";
+
+body{
+  font-family: Junicode;
+  font-size: 14pt;
+  background-color: #FFEBD8;
+  padding: 15px;
+  max-width: 900px;
+  margin: auto;
 }
 
-/* Fixed sidenav, full height */
-.sidenav {
+#header {
+  padding: 0 0 0px 15px;
+  border-left: 3px solid #bb535dff;
+}
+
+#content {
+  padding-left: 15px;
+  border-top: 1px solid #bb535dff;
+  border-left: 3px solid #bb535dff;
   height: 100%;
-  width: 200px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  padding-top: 20px;
 }
 
-/* Style the sidenav links and the dropdown button */
-.sidenav a, .dropdown-btn {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 20px;
-  color: #818181;
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-top: 3px solid #bb535dff;
+  border-left: 3px solid #bb535dff;
+  border-bottom: 2px solid #bb535dff;
+}
+
+li {
+  float: left;
+}
+
+li a, .dropbtn {
   display: block;
-  border: none;
-  background: none;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  outline: none;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 15px;
+  text-decoration: none;
 }
 
-/* On mouse-over */
-.sidenav a:hover, .dropdown-btn:hover {
-  color: #f1f1f1;
+li a:hover, .dropdown:hover .dropbtn {
+  background-color: #bb535dff;
 }
 
-/* Main content */
-.main {
-  margin-left: 200px; /* Same as the width of the sidenav */
-  font-size: 20px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
+li.dropdown {
+  display: block;
 }
 
-/* Add an active class to the active dropdown button */
-.active {
-  background-color: green;
-  color: white;
-}
-
-/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
-.dropdown-container {
+.dropdown-content {
   display: none;
-  background-color: #262626;
-  padding-left: 8px;
+  position: absolute;
+  background-color: #FFEBD8;
+  min-width: 160px;
+  box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.8);
+  z-index: 1;
 }
 
-/* Some media queries for responsiveness */
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
 }
 
-.dropdown-btn {
-  font-family: "Junicode";
+.dropdown-content a:hover {background-color: #bb535dff;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 </style>
 </head>
 <body>
 
-<div class="sidenav">
-  <a href="index.html">Home</a>
-  <button class="dropdown-btn">Mass</button>  
-    <div class="dropdown-container">
-      <a href="#">The Propers of Mass</a>
-      <a href="#">The Kyriale</a>
+<div id="header">
+  <img src="title.png">
+</div>
+
+<ul>
+  <li><a href="index.html">Home</a></li>
+  <li class="dropdown">
+    <a href="javascript:void(0)" class="dropbtn">Mass</a>
+    <div class="dropdown-content">
       <a href="#">Mass for the Dead</a>
     </div>
-  <button class="dropdown-btn">Office</button>  
-    <div class="dropdown-container">
-      <a href="#">The Feast of St.<br>Cecilia</a>
-      <a href="#">The Feast of St. Cuthbert</a>
-      <a href="#">Lections</a>
+  </li>
+  <li class="dropdown">
+    <a href="javascript:void(0)" class="dropbtn">Office</a>
+    <div class="dropdown-content">
+      <a href="#">St. Cecilia</a>
+      <a href="#">St. Cuthbert</a>
+	  <a href="#">Compline</a>
 	  <a href="#">Tonary</a>
 	  <a href="#">Venitare</a>
     </div>
-  <a href="#contact">Contact</a>
+  </li>
+  <li><a href="">About</a></li>
+</ul>
+
+<div id="content">
+
+<p>Concerning the medieval liturgy of the Use of York. Click above to view projects relating to the Mass or Office. Each page contains an edition in modern notation and commentary.</p>
+
 </div>
 
-<script>
-/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-var dropdown = document.getElementsByClassName("dropdown-btn");
-var i;
-
-for (i = 0; i < dropdown.length; i++) {
-  dropdown[i].addEventListener("click", function() {
-  this.classList.toggle("active");
-  var dropdownContent = this.nextElementSibling;
-  if (dropdownContent.style.display === "block") {
-  dropdownContent.style.display = "none";
-  } else {
-  dropdownContent.style.display = "block";
-  }
-  });
-}
-</script>
-
-<div class="main">
-  <h3>Concerning the liturgy of the medieval Use of York.</h3>
-  
-  <p>Click left to view projects relating to the Mass and Office. Each page contains an edition in modern notation and commentary.</p>
-</div>
 
 </body>
 </html>
