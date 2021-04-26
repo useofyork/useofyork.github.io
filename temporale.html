@@ -107,7 +107,7 @@ a {
 }
 </style>
 </head>
-<body>
+<body onload="loadMass()">
 
 <div id="header">
   <img src="title.svg" width=56%>
@@ -139,6 +139,7 @@ a {
   <h2 style="text-align: center">Temporale.</h2>
 
   <div style="text-align: center">
+    <label for="selectMass">Select a Sunday:</label>
     <select id="selectMass" onchange="loadMass()">
       <option value="00"></option>
       <option value="01">Advent j.</option>
@@ -146,7 +147,7 @@ a {
     </select>
   </div>
 
-  <h3 id="massName"></h3>
+  <h2 id="massName"></h2>
 
   <div style="text-align: center"><img id="massSvg" src="00.svg" width=75%></div>
  
@@ -161,6 +162,7 @@ a {
 <script>
 
   function loadMass() {
+
     var id = document.getElementById("selectMass").value;
 
     var select = document.getElementById("selectMass");
@@ -170,6 +172,7 @@ a {
 
     var svg = document.getElementById("massSvg");
     svg.src = './temporale/' + id + '.svg';
+
   }
 
 </script>
