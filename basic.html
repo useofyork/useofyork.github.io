@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+
+  <style>
+
+    @font-face {
+      font-family: Woodcut;
+      src: url(Woodcut1.ttf) format("truetype");
+    }
+
+    h1 {
+      font-family: Junicode;
+      text-align: center;
+      font-weight: normal;
+      font-style: italic;
+    }
+
+  </style>
+
+</head>
+
+<body onload="updateChant()" onresize="layoutChant()">
+
+  <h1>Sunday.</h1>
+
+  <div id="offc-container"></div>
+
+  <div id="gr-container"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/document-register-element/0.5.3/document-register-element.js">/* W3C Custom Elements */</script>
+  <script type="text/javascript" src="https://ex.surge.sh/exsurge.js"></script>
+  <script type="text/javascript">
+
+    var ctxt = new exsurge.ChantContext();
+    ctxt.lyricTextFont = "'Junicode', serif";
+    ctxt.lyricTextSize = 20;
+
+    ctxt.dropCapTextSize = 42;
+    ctxt.dropCapTextFont = "'Woodcut'";
+    ctxt.annotationTextFont = ctxt.lyricTextFont;
+    
+    var scoreOffc;
+    var scoreGr;
+    
+    var gabcOffc = "(c4) TEst.(dv)";
+    var gabcGr = "(c4) TEst.(k)";
+    
+    var offcContainer = document.getElementById('offc-container');
+    var grContainer = document.getElementById('gr-container');
+
+    var updateChant = function() {
+      // Officium
+      if (scoreOffc) {
+        exsurge.Gabc.updateMappingsFromSource(ctxt, scoreOffc.mappings, gabcOffc);
+        scoreOffc.updateNotations(ctxt);
+      } else {
+        mappings = exsurge.Gabc.createMappingsFromSource(ctxt, gabcOffc);
+        scoreOffc = new exsurge.ChantScore(ctxt, mappings, true);
+        scoreOffc.annotation = new exsurge.Annotation(ctxt, "Offc. V.");
+      }
+
+      // Graduale
+      if (scoreGr) {
+        exsurge.Gabc.updateMappingsFromSource(ctxt, scoreGr.mappings, gabcGr);
+        scoreGr.updateNotations(ctxt);
+      } else {
+        mappings = exsurge.Gabc.createMappingsFromSource(ctxt, gabcGr);
+        scoreGr = new exsurge.ChantScore(ctxt, mappings, true);
+        scoreGr.annotation = new exsurge.Annotation(ctxt, "Gr. II.");
+      }
+      
+      layoutChant();
+    }
+    var layoutChant = function() {
+      // perform layout on the chant
+
+      // Officium
+      scoreOffc.performLayoutAsync(ctxt, function() {
+        scoreOffc.layoutChantLines(ctxt, offcContainer.clientWidth, function() {
+          // render the score to svg code
+          offcContainer.innerHTML = scoreOffc.createSvg(ctxt);
+        });
+      });
+
+      // Graduale
+      scoreGr.performLayoutAsync(ctxt, function() {
+        scoreGr.layoutChantLines(ctxt, grContainer.clientWidth, function() {
+          // render the score to svg code
+          grContainer.innerHTML = scoreGr.createSvg(ctxt);
+        });
+      });
+    }
+  </script>
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
