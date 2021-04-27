@@ -99,12 +99,20 @@ h1, h2, h3 {
   font-weight: normal;
   font-style: italic;
   text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 a {
   color: #AF0000;
   font-style: italic;
 }
+
+/* Chant divs */
+.chantDiv {
+  padding: 20px;
+}
+
 </style>
 </head>
 <body>
@@ -136,32 +144,36 @@ a {
 
 <div id="content">
 
+  <br>
   <h1 style="text-align: center">Temporale.</h1>
+  <br>
 
   <div id="options" style="text-align: center">
-    <label for="selectMass">Select a Sunday:</label>
-    <select id="selectMass" onchange="loadMass()">
+    <label for="selectMass">Select a feast day:</label>
+    <select id="selectMass" onchange="clearAll()">
       <option value="00"></option>
       <option value="01">Advent j.</option>
       <option value="36">In die pasche.</option>
       <option value="45">Dominica iij. post pascha.</option>
     </select>
-    &nbsp||&nbsp&nbspBenedictio Aque: <input type="checkbox" id="beneCheck" onclick="loadBene()">
-    &nbsp||&nbsp&nbspKyriale: <input type="checkbox" id="kyCheck" onclick="loadKyriale()">
+    &nbsp||&nbsp&nbspBenedictio aque: <input type="checkbox" id="beneCheck">
+    &nbsp||&nbsp&nbspKyriale: <input type="checkbox" id="kyCheck">
+    &nbsp||&nbsp&nbsp<button type="button" onclick="loadMass()">Update</button>
   </div>
 
+  <br>
   <h1 id="massName"></h1>
 
-  <div style="text-align: center"><img id="beneSvg" src="./temporale/00.svg" width=75%></div>
-  <div style="text-align: center"><img id="offcSvg" src="./temporale/00.svg" width=75%></div>
-  <div style="text-align: center"><img id="kyrieSvg" src="./temporale/00.svg" width=75%></div>
-  <div style="text-align: center"><img id="gloriaSvg" src="./temporale/00.svg" width=75%></div>
-  <div style="text-align: center"><img id="gastSvg" src="./temporale/00.svg" width=75%></div>
-  <div style="text-align: center"><img id="credoSvg" src="./temporale/00.svg" width=75%></div>
-  <div style="text-align: center"><img id="offrSvg" src="./temporale/00.svg" width=75%></div>
-  <div style="text-align: center"><img id="sanctusSvg" src="./temporale/00.svg" width=75%></div>
-  <div style="text-align: center"><img id="agnusSvg" src="./temporale/00.svg" width=75%></div>
-  <div style="text-align: center"><img id="coSvg" src="./temporale/00.svg" width=75%></div>
+  <div class="chantDiv" style="display:none" id="beneDiv"><img id="beneSvg" src="" width=620px></div>
+  <div class="chantDiv" style="display:none" id="offcDiv"><img id="offcSvg" src="" width=620px></div>
+  <div class="chantDiv" style="display:none" id="kyrieDiv"><img id="kyrieSvg" src="" width=620px></div>
+  <div class="chantDiv" style="display:none" id="gloriaDiv"><img id="gloriaSvg" src="" width=620px></div>
+  <div class="chantDiv" style="display:none" id="gastDiv"><img id="gastSvg" src="" width=620px></div>
+  <div class="chantDiv" style="display:none" id="credoDiv"><img id="credoSvg" src="" width=620px></div>
+  <div class="chantDiv" style="display:none" id="offrDiv"><img id="offrSvg" src="" width=620px></div>
+  <div class="chantDiv" style="display:none" id="sanctusDiv"><img id="sanctusSvg" src="" width=620px></div>
+  <div class="chantDiv" style="display:none" id="agnusDiv"><img id="agnusSvg" src="" width=620px></div>
+  <div class="chantDiv" style="display:none" id="coDiv"><img id="coSvg" src="" width=620px></div>
 
   <br><br>
  
@@ -175,116 +187,126 @@ Copyright &#169 Brandon Wild MMXX.<span style="float: right;"><a href="">Top</a>
 
 <script>
 
-  function loadBene() {
+  function clearAll() {
 
-    var id = document.getElementById("selectMass").value;
-    var svg = document.getElementById("beneSvg")
-    var bene = document.getElementById("beneCheck");
+    document.getElementById("beneCheck").checked = false;
+    document.getElementById("kyCheck").checked = false;
 
-    if (bene.checked == true) {
-      // show Vidi aquam if between Easter (mass 36) and ???, else Asperges
-      if (id >= 36) {
-        svg.src = './temporale/vidi.svg';
-      } else {
-        svg.src = './temporale/asperges.svg';
-      }
-    } else {
-        svg.src = './temporale/00.svg';
-    }
+    title = document.getElementById("massName").innerHTML = "";
 
-  //loadMass()
+    document.getElementById("beneSvg").src = "";
+    document.getElementById("beneDiv").style = "display:none";
 
-  }
+    document.getElementById("offcSvg").src = "";
+    document.getElementById("offcDiv").style = "display:none";
 
-  function loadKyriale() {
+    document.getElementById("kyrieSvg").src = "";
+    document.getElementById("kyrieDiv").style = "display:none";
 
-    var id = document.getElementById("selectMass").value;
+    document.getElementById("gloriaSvg").src = "";
+    document.getElementById("gloriaDiv").style = "display:none";
 
-    var kSvg = document.getElementById("kyrieSvg")
-    var gSvg = document.getElementById("gloriaSvg")
-    var cSvg = document.getElementById("credoSvg")
-    var sSvg = document.getElementById("sanctusSvg")
-    var aSvg = document.getElementById("agnusSvg")
+    document.getElementById("gastSvg").src = "";
+    document.getElementById("gastDiv").style = "display:none";
 
-    var ky = document.getElementById("kyCheck");
+    document.getElementById("credoSvg").src = "";
+    document.getElementById("credoDiv").style = "display:none";
 
-    if (ky.checked == true) {
-      // show Vidi aquam if between Easter (mass 36) and ???, else Asperges
-      if (id != 00) {
-        kSvg.src = './temporale/kyriale/kyrie-.svg';
-        gSvg.src = './temporale/kyriale/gloria-.svg';
-        cSvg.src = './temporale/kyriale/credo.svg';
-        sSvg.src = './temporale/kyriale/sanctus-.svg';
-        aSvg.src = './temporale/kyriale/agnus-.svg';
-      }
-    } else {
-        kSvg.src = './temporale/00.svg';
-        gSvg.src = './temporale/00.svg';
-        cSvg.src = './temporale/00.svg';
-        sSvg.src = './temporale/00.svg';
-        aSvg.src = './temporale/00.svg';
-    }
+    document.getElementById("offrSvg").src = "";
+    document.getElementById("offrDiv").style = "display:none";
 
-  //loadMass()
+    document.getElementById("sanctusSvg").src = "";
+    document.getElementById("sanctusDiv").style = "display:none";
+
+    document.getElementById("agnusSvg").src = "";
+    document.getElementById("agnusDiv").style = "display:none";
+
+    document.getElementById("coSvg").src = "";
+    document.getElementById("coDiv").style = "display:none";
 
   }
-
 
   function loadMass() {
 
     var id = document.getElementById("selectMass").value;
-    
-    if (id == "00") {
 
-      var select = document.getElementById("selectMass");
-      var titleText = select.options[select.selectedIndex].innerHTML;
-      var title = document.getElementById("massName");
+    // Benediction
+    if (id != "00" && document.getElementById("beneCheck").checked == true) {
+      document.getElementById("beneDiv").style = "display:block; text-align:center";
+      // show Vidi aquam if between Easter (mass 36) and ???, else Asperges
+      if (id >= 36) {
+        document.getElementById("beneSvg").src = "./temporale/vidi.svg";
+      } else {
+        document.getElementById("beneSvg").src = './temporale/asperges.svg';
+      }
+    } else {
+      document.getElementById("beneDiv").style = "display:none";
+    }
 
-      title.innerHTML = titleText;
+    // Kyriale
 
-      var svg;
+    if (document.getElementById("kyCheck").checked == true) {
+      
+      // show Vidi aquam if between Easter (mass 36) and ???, else Asperges 
+      // ...it will, for now just all but blank
+      if (id != "00") {
 
-      // Officium
-      svg = document.getElementById("offcSvg");
-      svg.src = './temporale/00.svg';
+        document.getElementById("kyrieSvg").src = "./temporale/kyriale/kyrie-o-rex-sv.svg";
+        document.getElementById("kyrieDiv").style = "display:block; text-align:center";
 
-      // G-radual A-lleluya S-equence T-ract
-      svg = document.getElementById("gastSvg");
-      svg.src = './temporale/00.svg';
+        document.getElementById("gloriaSvg").src = "./temporale/kyriale/gloria-dominicis.svg";
+        document.getElementById("gloriaDiv").style = "display:block; text-align:center";
 
-      // Offertory
-      svg = document.getElementById("offrSvg");
-      svg.src = './temporale/00.svg';
+        document.getElementById("credoSvg").src = "./temporale/kyriale/credo.svg";
+        document.getElementById("credoDiv").style = "display:block; text-align:center";
 
-      // Communion
-      svg = document.getElementById("coSvg");
-      svg.src = './temporale/00.svg';
-    
+        document.getElementById("sanctusSvg").src = "./temporale/kyriale/sanctus-clangat-sv.svg";
+        document.getElementById("sanctusDiv").style = "display:block; text-align:center";
+
+        document.getElementById("agnusSvg").src = "./temporale/kyriale/agnus-fons-sv.svg";
+        document.getElementById("agnusDiv").style = "display:block; text-align:center";
+
+      }
     } else {
 
+        document.getElementById("kyrieSvg").src = ""
+        document.getElementById("kyrieDiv").style = "display:none";
+
+        document.getElementById("gloriaSvg").src = ""
+        document.getElementById("gloriaDiv").style = "display:none";
+
+        document.getElementById("credoSvg").src = ""
+        document.getElementById("credoDiv").style = "display:none";
+
+        document.getElementById("sanctusSvg").src = ""
+        document.getElementById("sanctusDiv").style = "display:none";
+
+        document.getElementById("agnusSvg").src = ""
+        document.getElementById("agnusDiv").style = "display:none";
+
+    }
+
+    // Propers
+    if (id != "00") {
+
       var select = document.getElementById("selectMass");
-      var titleText = select.options[select.selectedIndex].innerHTML;
-      var title = document.getElementById("massName");
-
-      title.innerHTML = titleText;
-
-      var svg;
+      document.getElementById("massName").innerHTML = select.options[select.selectedIndex].innerHTML;
 
       // Officium
-      svg = document.getElementById("offcSvg");
-      svg.src = './temporale/' + id + '/offc.svg';
+      document.getElementById("offcSvg").src = "./temporale/" + id + "/offc.svg";
+      document.getElementById("offcDiv").style = "display:block; text-align:center";
 
       // G-radual A-lleluya S-equence T-ract
-      svg = document.getElementById("gastSvg");
-      svg.src = './temporale/' + id + '/gast.svg';
+      document.getElementById("gastSvg").src = "./temporale/" + id + "/gast.svg";
+      document.getElementById("gastDiv").style = "display:block; text-align:center";
 
       // Offertory
-      svg = document.getElementById("offrSvg");
-      svg.src = './temporale/' + id + '/offr.svg';
+      document.getElementById("offrSvg").src = "./temporale/" + id + "/offr.svg";
+      document.getElementById("offrDiv").style = "display:block; text-align:center";
 
       // Communion
-      svg = document.getElementById("coSvg");
-      svg.src = './temporale/' + id + '/co.svg';
+      document.getElementById("coSvg").src = "./temporale/" + id + "/co.svg";
+      document.getElementById("coDiv").style = "display:block; text-align:center";
 
     }
 
