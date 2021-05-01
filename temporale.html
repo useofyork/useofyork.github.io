@@ -3,10 +3,34 @@
 <head>
 <style>
 
+@font-face {
+  font-family: "Juni";
+  src: url("fonts/Junicode.ttf");
+}
+
+@font-face {
+  font-family: "Juni";
+  src: url("fonts/Junicode-Bold.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Juni";
+  src: url("fonts/Junicode-Italic.ttf");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Juni";
+  src: url("fonts/Junicode-BoldItalic.ttf");
+  font-weight: bold;
+  font-style: italic;
+}
+
 body{
-  font-family: Junicode, serif;
+  font-family: Juni, serif;
   font-size: 14pt;
-  background-color: #FFEBD8;
+  background-color: #FFE9D3;
   padding-top: 30px;
   max-width: 900px;
   margin: auto;
@@ -14,7 +38,7 @@ body{
 
 #header {
   padding: 0 0 0px 15px;
-  border-left: 3px solid #AF0000;
+  border-left: 0px solid #AF0000;
 }
 
 #navbar {
@@ -23,14 +47,14 @@ body{
   padding: 0;
   overflow: hidden;
   border-top: 3px solid #AF0000;
-  border-left: 3px solid #AF0000;
+  border-left: 0px solid #AF0000;
   border-bottom: 2px solid #AF0000;
 }
 
 #content {
   padding-left: 15px;
   border-top: 1px solid #AF0000;
-  border-left: 3px solid #AF0000;
+  border-left: 0px solid #AF0000;
   border-bottom: 2px solid #AF0000;
   height: 100%;
 }
@@ -38,7 +62,7 @@ body{
 #footer {
   padding: 10px 15px;
   border-top: 1px solid #AF0000;  
-  border-left: 3px solid #AF0000;
+  border-left: 0px solid #AF0000;
 }
 
 li.link {
@@ -69,9 +93,9 @@ li.dropdown {
   position: absolute;
   color: #AF0000;
   font-size: 24pt;
-  background-color: #FFEBD8;
+  background-color: #FFE9D3;
   min-width: 160px;
-  border: 3px solid #AF0000;
+  border-top: 3px solid #AF0000;
   z-index: 1;
 }
 
@@ -83,6 +107,7 @@ li.dropdown {
   text-decoration: none;
   display: block;
   text-align: left;
+  border-bottom: 3px solid #AF0000;
 }
 
 .dropdown-content a:hover {
@@ -99,8 +124,6 @@ h1, h2, h3 {
   font-weight: normal;
   font-style: italic;
   text-align: center;
-  margin-top: 0;
-  margin-bottom: 0;
 }
 
 a {
@@ -108,7 +131,7 @@ a {
   font-style: italic;
 }
 
-/* Chant divs */
+/* Chant divs - not needed elsewhere */
 .chantDiv {
   padding: 20px;
 }
@@ -118,38 +141,39 @@ a {
 <body>
 
 <div id="header">
-  <img src="title.svg" width=56%>
+  <a href="index.html"><img src="title.svg" width=56%></a>
 </div>
 
 <ul id="navbar">
-  <li class="link"><a href="index.html">Home</a></li>
+  <!-- <li class="link"><a href="index.html">Home</a></li> -->
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">Mass</a>
     <div class="dropdown-content">
-      <a href="massforthedead.html">Mass for the Dead</a>
+      <!-- <a href="massforthedead.html">Mass for the Dead</a> -->
+      <a href="temporale.html">Temporale</a>
     </div>
   </li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">Office</a>
     <div class="dropdown-content">
-      <a href="cecilia.html">St. Cecilia</a>
-      <a href="cuthbert.html">St. Cuthbert</a>
-	  <a href="compline.html">Compline</a>
-	  <a href="tonale.html">Tonale</a>
-	  <a href="venitare.html">Venitare</a>
+      <!--
+        <a href="">St. Cecilia</a>
+        <a href="">St. Cuthbert</a>
+        <a href="">Compline</a>
+      -->
+      <a href="">Tonale</a>
+      <a href="">Venitare</a>
     </div>
   </li>
-  <li class="link"><a href="">About</a></li>
+  <!-- <li class="link"><a href="">About</a></li> -->
 </ul>
 
 <div id="content">
 
-  <br>
   <h1 style="text-align: center">Temporale.</h1>
-  <br>
 
   <div id="options" style="text-align: center">
-    <label for="selectMass">Select a feast day:</label>
+    <label for="selectMass">Select a feast:</label>
     <select id="selectMass" onchange="clearAll()">
       <option value="00"></option>
       <option value="01">Advent j.</option>
@@ -161,7 +185,6 @@ a {
     &nbsp||&nbsp&nbsp<button type="button" onclick="loadMass()">Update</button>
   </div>
 
-  <br>
   <h1 id="massName"></h1>
 
   <div class="chantDiv" style="display:none" id="beneDiv"><img id="beneSvg" src="" width=620px></div>
@@ -181,7 +204,7 @@ a {
 
 <div id="footer">
 
-Copyright &#169 Brandon Wild MMXX.<span style="float: right;"><a href="">Top</a></span>
+Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">Top</a></span>
 
 </div>
 
