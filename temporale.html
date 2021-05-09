@@ -183,6 +183,7 @@ a {
       <option value="36">In die pasche.</option>
       <option value="45">Dominica iij. post pascha.</option>
       <option value="46">Dominica iiij. post pascha.</option>
+      <option value="47">Dominica v. post pascha.</option>
     </select>
     &nbsp||&nbsp&nbspAspersionem aquam: <input type="checkbox" id="beneCheck">
     &nbsp||&nbsp&nbspKyriale: <input type="checkbox" id="kyCheck">
@@ -274,15 +275,18 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
 
     if (document.getElementById("kyCheck").checked == true) {
       
-      // show Vidi aquam if between Easter (mass 36) and ???, else Asperges 
-      // ...it will, for now just all but blank
       if (id != "00") {
 
         document.getElementById("kyrieSvg").src = "./temporale/kyriale/kyrie-o-rex-sv.svg";
         document.getElementById("kyrieDiv").style = "display:block; text-align:center";
 
-        document.getElementById("gloriaSvg").src = "./temporale/kyriale/gloria-dominicis.svg";
-        document.getElementById("gloriaDiv").style = "display:block; text-align:center";
+        if (id == "01" || id == "02" || id == "03" || id == "04") {
+          document.getElementById("gloriaSvg").src = ""
+          document.getElementById("gloriaDiv").style = "display:none";
+        } else {
+          document.getElementById("gloriaSvg").src = "./temporale/kyriale/gloria-dominicis.svg";
+          document.getElementById("gloriaDiv").style = "display:block; text-align:center";
+        }
 
         document.getElementById("credoSvg").src = "./temporale/kyriale/credo.svg";
         document.getElementById("credoDiv").style = "display:block; text-align:center";
@@ -294,6 +298,7 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
         document.getElementById("agnusDiv").style = "display:block; text-align:center";
 
       }
+
     } else {
 
         document.getElementById("kyrieSvg").src = ""
