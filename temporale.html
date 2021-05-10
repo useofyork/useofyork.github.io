@@ -275,14 +275,17 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
     // Kyriale
 
     if (document.getElementById("kyCheck").checked == true) {
+
+      var day = new Date();
       
-      if (id != "00") {
+      if (id != "00" && id != "05") {
 
         document.getElementById("kyrieSvg").src = "./temporale/kyriale/kyrie-o-rex-sv.svg";
         document.getElementById("kyrieDiv").style = "display:block; text-align:center";
 
+        // Advent 01-04
         if (id == "01" || id == "02" || id == "03" || id == "04") {
-          document.getElementById("gloriaSvg").src = ""
+          document.getElementById("gloriaSvg").src = "";
           document.getElementById("gloriaDiv").style = "display:none";
         } else {
           document.getElementById("gloriaSvg").src = "./temporale/kyriale/gloria-dominicis.svg";
@@ -298,23 +301,40 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
         document.getElementById("agnusSvg").src = "./temporale/kyriale/agnus-fons-sv.svg";
         document.getElementById("agnusDiv").style = "display:block; text-align:center";
 
+      } else if (id == "05" && day.getDay() != 0) {
+       
+        document.getElementById("kyrieSvg").src = "./temporale/kyriale/kyrie-fer.svg";
+        document.getElementById("kyrieDiv").style = "display:block; text-align:center";
+
+        document.getElementById("gloriaSvg").src = "./temporale/kyriale/gloria-dominicis.svg";
+        document.getElementById("gloriaDiv").style = "display:block; text-align:center";
+
+        document.getElementById("credoSvg").src = "./temporale/kyriale/credo.svg";
+        document.getElementById("credoDiv").style = "display:block; text-align:center";
+
+        document.getElementById("sanctusSvg").src = "./temporale/kyriale/sanctus-fer.svg";
+        document.getElementById("sanctusDiv").style = "display:block; text-align:center";
+
+        document.getElementById("agnusSvg").src = "./temporale/kyriale/agnus-fer.svg";
+        document.getElementById("agnusDiv").style = "display:block; text-align:center";
+          
       }
 
     } else {
 
-        document.getElementById("kyrieSvg").src = ""
+        document.getElementById("kyrieSvg").src = "";
         document.getElementById("kyrieDiv").style = "display:none";
 
-        document.getElementById("gloriaSvg").src = ""
+        document.getElementById("gloriaSvg").src = "";
         document.getElementById("gloriaDiv").style = "display:none";
 
-        document.getElementById("credoSvg").src = ""
+        document.getElementById("credoSvg").src = "";
         document.getElementById("credoDiv").style = "display:none";
 
-        document.getElementById("sanctusSvg").src = ""
+        document.getElementById("sanctusSvg").src = "";
         document.getElementById("sanctusDiv").style = "display:none";
 
-        document.getElementById("agnusSvg").src = ""
+        document.getElementById("agnusSvg").src = "";
         document.getElementById("agnusDiv").style = "display:none";
 
     }
