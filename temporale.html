@@ -181,6 +181,7 @@ a {
       <option value="03">Dominica iij. adventus Domini.</option>
       <option value="04">Dominica iiij. adventus Domini.</option>
       <option value="05">In vigilia nativitatis Domini.</option>
+      <option value="06">Ad missam in gallicantu.</option>
       <option value="36">In die pasche.</option>
       <option value="45">Dominica iij. post pascha.</option>
       <option value="46">Dominica iiij. post pascha.</option>
@@ -218,9 +219,6 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
 
   function clearAll() {
 
-    document.getElementById("beneCheck").checked = false;
-    document.getElementById("kyCheck").checked = false;
-
     title = document.getElementById("massName").innerHTML = "";
 
     document.getElementById("beneSvg").src = "";
@@ -257,108 +255,145 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
 
   function loadMass() {
 
-    var id = document.getElementById("selectMass").value;
+    var mass = document.getElementById("selectMass").value;
+
 
     // Benediction
-    if (id != "00" && document.getElementById("beneCheck").checked == true) {
-      document.getElementById("beneDiv").style = "display:block; text-align:center";
+
+    if (mass != "00" && document.getElementById("beneCheck").checked == true) {
+
       // show Vidi aquam if between Easter (mass 36) and ???, else Asperges
-      if (id >= 36) {
+      if (parseInt(mass) >= 36) {
+
         document.getElementById("beneSvg").src = "./temporale/vidi.svg";
+
       } else {
+
         document.getElementById("beneSvg").src = './temporale/asperges.svg';
+
       }
+
+      document.getElementById("beneDiv").style = "display:block; text-align:center";
+
     } else {
+
       document.getElementById("beneDiv").style = "display:none";
+
     }
+
 
     // Kyriale
 
-    if (document.getElementById("kyCheck").checked == true) {
+    if (mass != "00" && document.getElementById("kyCheck").checked == true) {
 
       var day = new Date();
-      
-      if (id != "00" && id != "05") {
 
-        document.getElementById("kyrieSvg").src = "./temporale/kyriale/kyrie-o-rex-sv.svg";
-        document.getElementById("kyrieDiv").style = "display:block; text-align:center";
+      // Kyrie
+      switch (mass) {
 
-        // Advent 01-04
-        if (id == "01" || id == "02" || id == "03" || id == "04") {
-          document.getElementById("gloriaSvg").src = "";
-          document.getElementById("gloriaDiv").style = "display:none";
-        } else {
-          document.getElementById("gloriaSvg").src = "./temporale/kyriale/gloria-dominicis.svg";
-          document.getElementById("gloriaDiv").style = "display:block; text-align:center";
-        }
+        // Vigilia nat Domini ferial
+        case "05":
+          if (day.getDay() != 0) {            
+            document.getElementById("kyrieSvg").src = "./temporale/kyriale/kyrie-fer.svg";
+            document.getElementById("kyrieDiv").style = "display:block; text-align:center";
+          }
+          break;
 
-        document.getElementById("credoSvg").src = "./temporale/kyriale/credo.svg";
-        document.getElementById("credoDiv").style = "display:block; text-align:center";
+        // Gallicantu
+        case "06":
+          document.getElementById("kyrieSvg").src = "./temporale/kyriale/kyrie-puer-sv.svg";
+          document.getElementById("kyrieDiv").style = "display:block; text-align:center";
+          break;
 
-        document.getElementById("sanctusSvg").src = "./temporale/kyriale/sanctus-clangat-sv.svg";
-        document.getElementById("sanctusDiv").style = "display:block; text-align:center";
+        default:
+          document.getElementById("kyrieSvg").src = "./temporale/kyriale/kyrie-o-rex-sv.svg";
+          document.getElementById("kyrieDiv").style = "display:block; text-align:center";
 
-        document.getElementById("agnusSvg").src = "./temporale/kyriale/agnus-fons-sv.svg";
-        document.getElementById("agnusDiv").style = "display:block; text-align:center";
-
-      } else if (id == "05" && day.getDay() != 0) {
-       
-        document.getElementById("kyrieSvg").src = "./temporale/kyriale/kyrie-fer.svg";
-        document.getElementById("kyrieDiv").style = "display:block; text-align:center";
-
-        document.getElementById("gloriaSvg").src = "./temporale/kyriale/gloria-dominicis.svg";
-        document.getElementById("gloriaDiv").style = "display:block; text-align:center";
-
-        document.getElementById("credoSvg").src = "./temporale/kyriale/credo.svg";
-        document.getElementById("credoDiv").style = "display:block; text-align:center";
-
-        document.getElementById("sanctusSvg").src = "./temporale/kyriale/sanctus-fer.svg";
-        document.getElementById("sanctusDiv").style = "display:block; text-align:center";
-
-        document.getElementById("agnusSvg").src = "./temporale/kyriale/agnus-fer.svg";
-        document.getElementById("agnusDiv").style = "display:block; text-align:center";
-          
       }
 
-    } else {
+      // Gloria
+      switch (mass) {
 
-        document.getElementById("kyrieSvg").src = "";
-        document.getElementById("kyrieDiv").style = "display:none";
+        // Advent
+        case "01":
+        case "02":
+        case "03":
+        case "04":
+          document.getElementById("gloriaSvg").src = "";
+          document.getElementById("gloriaDiv").style = "display:none";
+          break;
 
-        document.getElementById("gloriaSvg").src = "";
-        document.getElementById("gloriaDiv").style = "display:none";
+        // Gallicantu
+        case "06":
+          document.getElementById("gloriaSvg").src = "./temporale/kyriale/gloria-de-angelis.svg";
+          document.getElementById("gloriaDiv").style = "display:block; text-align:center";
+          break;
 
-        document.getElementById("credoSvg").src = "";
-        document.getElementById("credoDiv").style = "display:none";
+        default:
+          document.getElementById("gloriaSvg").src = "./temporale/kyriale/gloria-dominicis.svg";
+          document.getElementById("gloriaDiv").style = "display:block; text-align:center";
 
-        document.getElementById("sanctusSvg").src = "";
-        document.getElementById("sanctusDiv").style = "display:none";
+      }
 
-        document.getElementById("agnusSvg").src = "";
-        document.getElementById("agnusDiv").style = "display:none";
+      // Credo is not variable
+      document.getElementById("credoSvg").src = "./temporale/kyriale/credo.svg";
+      document.getElementById("credoDiv").style = "display:block; text-align:center";
+
+      // Sanctus
+      switch (mass) {
+
+        // Vigilia nat Domini ferial
+        case "05":
+          if (day.getDay() != 0) {            
+            document.getElementById("sanctusSvg").src = "./temporale/kyriale/sanctus-fer.svg";
+            document.getElementById("sanctusDiv").style = "display:block; text-align:center";
+          }
+          break;
+
+        default:
+          document.getElementById("sanctusSvg").src = "./temporale/kyriale/sanctus-clangat-sv.svg";
+          document.getElementById("sanctusDiv").style = "display:block; text-align:center";
+
+      }
+
+      switch (mass) {
+
+        // Vigilia nat Domini ferial
+        case "05":
+          if (day.getDay() != 0) {            
+            document.getElementById("agnusSvg").src = "./temporale/kyriale/agnus-fer.svg";
+            document.getElementById("agnusDiv").style = "display:block; text-align:center";
+          }
+          break;
+
+        default:
+          document.getElementById("agnusSvg").src = "./temporale/kyriale/agnus-fons-sv.svg";
+          document.getElementById("agnusDiv").style = "display:block; text-align:center";          
+      }
 
     }
 
+
     // Propers
-    if (id != "00") {
+    if (mass != "00") {
 
       var select = document.getElementById("selectMass");
       document.getElementById("massName").innerHTML = select.options[select.selectedIndex].innerHTML;
 
       // Officium
-      document.getElementById("offcSvg").src = "./temporale/" + id + "/offc.svg";
+      document.getElementById("offcSvg").src = "./temporale/" + mass + "/offc.svg";
       document.getElementById("offcDiv").style = "display:block; text-align:center";
 
       // G-radual A-lleluya S-equence T-ract
-      document.getElementById("gastSvg").src = "./temporale/" + id + "/gast.svg";
+      document.getElementById("gastSvg").src = "./temporale/" + mass + "/gast.svg";
       document.getElementById("gastDiv").style = "display:block; text-align:center";
 
       // Offertory
-      document.getElementById("offrSvg").src = "./temporale/" + id + "/offr.svg";
+      document.getElementById("offrSvg").src = "./temporale/" + mass + "/offr.svg";
       document.getElementById("offrDiv").style = "display:block; text-align:center";
 
       // Communion
-      document.getElementById("coSvg").src = "./temporale/" + id + "/co.svg";
+      document.getElementById("coSvg").src = "./temporale/" + mass + "/co.svg";
       document.getElementById("coDiv").style = "display:block; text-align:center";
 
     }
