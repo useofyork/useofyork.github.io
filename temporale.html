@@ -182,6 +182,7 @@ a {
       <option value="04">Dominica iiij. adventus Domini.</option>
       <option value="05">In vigilia nativitatis Domini.</option>
       <option value="06">Ad missam in gallicantu.</option>
+      <option value="07">Ad missam in aurora.</option>
       <option value="36">In die pasche.</option>
       <option value="45">Dominica iij. post pascha.</option>
       <option value="46">Dominica iiij. post pascha.</option>
@@ -295,21 +296,25 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
         case "05":
           if (day.getDay() != 0) {            
             document.getElementById("kyrieSvg").src = "./temporale/kyriale/kyrie-fer.svg";
-            document.getElementById("kyrieDiv").style = "display:block; text-align:center";
           }
           break;
 
-        // Gallicantu
+        // In gallicantu
         case "06":
           document.getElementById("kyrieSvg").src = "./temporale/kyriale/kyrie-puer-sv.svg";
-          document.getElementById("kyrieDiv").style = "display:block; text-align:center";
+          break;
+
+        // In aurora
+        case "07":
+          document.getElementById("kyrieSvg").src = "./temporale/kyriale/kyrie-rex-virginum-sv.svg";
           break;
 
         default:
           document.getElementById("kyrieSvg").src = "./temporale/kyriale/kyrie-o-rex-sv.svg";
-          document.getElementById("kyrieDiv").style = "display:block; text-align:center";
 
       }
+
+      document.getElementById("kyrieDiv").style = "display:block; text-align:center";
 
       // Gloria
       switch (mass) {
@@ -323,9 +328,15 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
           document.getElementById("gloriaDiv").style = "display:none";
           break;
 
-        // Gallicantu
+        // In gallicantu
         case "06":
           document.getElementById("gloriaSvg").src = "./temporale/kyriale/gloria-de-angelis.svg";
+          document.getElementById("gloriaDiv").style = "display:block; text-align:center";
+          break;
+
+        // In aurora
+        case "07":
+          document.getElementById("gloriaSvg").src = "./temporale/kyriale/gloria-de-domina.svg";
           document.getElementById("gloriaDiv").style = "display:block; text-align:center";
           break;
 
@@ -346,30 +357,41 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
         case "05":
           if (day.getDay() != 0) {            
             document.getElementById("sanctusSvg").src = "./temporale/kyriale/sanctus-fer.svg";
-            document.getElementById("sanctusDiv").style = "display:block; text-align:center";
           }
+          break;
+
+        // In aurora
+        case "07":
+          document.getElementById("sanctusSvg").src = "./temporale/kyriale/sanctus-de-domina-sv.svg";
           break;
 
         default:
           document.getElementById("sanctusSvg").src = "./temporale/kyriale/sanctus-clangat-sv.svg";
-          document.getElementById("sanctusDiv").style = "display:block; text-align:center";
 
       }
 
+      document.getElementById("sanctusDiv").style = "display:block; text-align:center";
+
+      //Agnus
       switch (mass) {
 
         // Vigilia nat Domini ferial
         case "05":
           if (day.getDay() != 0) {            
             document.getElementById("agnusSvg").src = "./temporale/kyriale/agnus-fer.svg";
-            document.getElementById("agnusDiv").style = "display:block; text-align:center";
           }
           break;
 
+        // In aurora
+        case "07":
+          document.getElementById("agnusSvg").src = "./temporale/kyriale/agnus-de-domina-sv.svg";
+          break;
+
         default:
-          document.getElementById("agnusSvg").src = "./temporale/kyriale/agnus-fons-sv.svg";
-          document.getElementById("agnusDiv").style = "display:block; text-align:center";          
+          document.getElementById("agnusSvg").src = "./temporale/kyriale/agnus-fons-sv.svg";         
       }
+
+      document.getElementById("agnusDiv").style = "display:block; text-align:center";
 
     }
 
