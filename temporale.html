@@ -188,6 +188,7 @@ a {
       <option value="46">Dominica iiij. post pascha.</option>
       <option value="47">Dominica v. post pascha.</option>
       <option value="51">Dominica infra octavas ascensionis.</option>
+      <option value="53">In die pentecostes.</option>
     </select>
     &nbsp||&nbsp&nbspAspersionem aquam: <input type="checkbox" id="beneCheck">
     &nbsp||&nbsp&nbspKyriale: <input type="checkbox" id="kyCheck">
@@ -308,6 +309,11 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
         // In aurora
         case "07":
           document.getElementById("kyrieSvg").src = "./temporale/kyriale/kyrie-rex-virginum-sv.svg";
+          break;
+
+        // In die pentecostes
+        case "53":
+          document.getElementById("kyrieSvg").src = "./temporale/kyriale/kyrie-fons.svg";
           break;
 
         default:
