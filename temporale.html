@@ -266,8 +266,8 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
 
     if (mass != "00" && document.getElementById("beneCheck").checked == true) {
 
-      // show Vidi aquam if between Easter (mass 36) and ???, else Asperges
-      if (parseInt(mass) >= 36) {
+      // show Vidi aquam if between Easter (36) and Trinity (60), else Asperges
+      if (parseInt(mass) >= 36 && parseInt(mass) <= 60) {
 
         document.getElementById("beneSvg").src = "./temporale/vidi.svg";
 
