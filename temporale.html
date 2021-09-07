@@ -153,8 +153,8 @@ a {
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">Mass</a>
     <div class="dropdown-content">
-      <!-- <a href="massforthedead.html">Mass for the Dead</a> -->
       <a href="temporale.html">Temporale</a>
+      <a href="defunctis.html">Missa pro defunctis</a>
     </div>
   </li>
   <li class="dropdown">
@@ -196,6 +196,7 @@ a {
       <option value="72">Dominica xj. post octavas pentecostes.</option>
       <option value="74">Dominica xiij. post octavas pentecostes.</option>
       <option value="75">Dominica xiiij. post octavas pentecostes.</option>
+      <option value="76">Dominica xv. post octavas pentecostes.</option>
     </select>
     &nbsp||&nbsp&nbspAspersionem aquam: <input type="checkbox" id="beneCheck">
     &nbsp||&nbsp&nbspKyriale: <input type="checkbox" id="kyCheck">
@@ -206,16 +207,20 @@ a {
 
   <div class="chantDiv" style="display:none" id="beneDiv"><img id="beneSvg" src="" width=620px></div>
   <div class="chantDiv" style="display:none" id="offcDiv"><img id="offcSvg" src="" width=620px></div>
+  <div class="chantDiv" style="display:none" id="offcTonesDiv"><a href="./temporale/offic-tones.pdf" target="_blank">Gloria Patri ad officium.</a></div>
   <div class="chantDiv" style="display:none" id="kyrieDiv"><img id="kyrieSvg" src="" width=620px></div>
   <div class="chantDiv" style="display:none" id="gloriaDiv"><img id="gloriaSvg" src="" width=620px></div>
   <div class="chantDiv" style="display:none" id="gastDiv"><img id="gastSvg" src="" width=620px></div>
+
+  <div class="chantDiv" style="display:none" id="seqTrinDiv"><a href="./temporale/sequencie-post-oct-pent.pdf" target="_blank">Sequencie in Dominicis post octavas pentecostes.</a></div>
+
   <div class="chantDiv" style="display:none" id="credoDiv"><img id="credoSvg" src="" width=620px></div>
   <div class="chantDiv" style="display:none" id="offrDiv"><img id="offrSvg" src="" width=620px></div>
   <div class="chantDiv" style="display:none" id="sanctusDiv"><img id="sanctusSvg" src="" width=620px></div>
   <div class="chantDiv" style="display:none" id="agnusDiv"><img id="agnusSvg" src="" width=620px></div>
   <div class="chantDiv" style="display:none" id="coDiv"><img id="coSvg" src="" width=620px></div>
 
-  <br><br>
+  <br>
  
 </div>
 
@@ -237,6 +242,8 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
     document.getElementById("offcSvg").src = "";
     document.getElementById("offcDiv").style = "display:none";
 
+    document.getElementById("offcTonesDiv").style = "display:none";
+
     document.getElementById("kyrieSvg").src = "";
     document.getElementById("kyrieDiv").style = "display:none";
 
@@ -245,6 +252,8 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
 
     document.getElementById("gastSvg").src = "";
     document.getElementById("gastDiv").style = "display:none";
+
+    document.getElementById("seqTrinDiv").style = "display:none";
 
     document.getElementById("credoSvg").src = "";
     document.getElementById("credoDiv").style = "display:none";
@@ -266,7 +275,6 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
   function loadMass() {
 
     var mass = document.getElementById("selectMass").value;
-
 
     // Benediction
 
@@ -305,6 +313,8 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
         case "05":
           if (day.getDay() != 0) {            
             document.getElementById("kyrieSvg").src = "./temporale/kyriale/kyrie-fer.svg";
+          } else {
+            document.getElementById("kyrieSvg").src = "./temporale/kyriale/kyrie-o-rex-sv.svg";
           }
           break;
 
@@ -371,6 +381,8 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
         case "05":
           if (day.getDay() != 0) {            
             document.getElementById("sanctusSvg").src = "./temporale/kyriale/sanctus-fer.svg";
+          } else {
+            document.getElementById("sanctusSvg").src = "./temporale/kyriale/sanctus-clangat-sv.svg";
           }
           break;
 
@@ -393,6 +405,8 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
         case "05":
           if (day.getDay() != 0) {            
             document.getElementById("agnusSvg").src = "./temporale/kyriale/agnus-fer.svg";
+          } else {
+            document.getElementById("agnusSvg").src = "./temporale/kyriale/agnus-fons-sv.svg";
           }
           break;
 
@@ -420,9 +434,16 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
       document.getElementById("offcSvg").src = "./temporale/" + mass + "/offc.svg";
       document.getElementById("offcDiv").style = "display:block; text-align:center";
 
+      document.getElementById("offcTonesDiv").style = "display:block; text-align:center";
+
       // G-radual A-lleluya S-equence T-ract
       document.getElementById("gastSvg").src = "./temporale/" + mass + "/gast.svg";
       document.getElementById("gastDiv").style = "display:block; text-align:center";
+
+      // Sequencie post octavas pentecostes
+      if (mass >= "62" && mass <= "86" && mass != "72") {
+        document.getElementById("seqTrinDiv").style = "display:block; text-align:center";
+      }
 
       // Offertory
       document.getElementById("offrSvg").src = "./temporale/" + mass + "/offr.svg";
