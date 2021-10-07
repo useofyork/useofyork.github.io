@@ -3,6 +3,7 @@
 <head>
 
 <title>The Use of York: Temporale</title>
+
 <link rel="icon" href="icon.svg">
 
 <style>
@@ -140,6 +141,10 @@ a {
   padding: 20px;
 }
 
+.offcTonesDiv {
+  padding: 0px 20px 20px 20px;
+}
+
 </style>
 </head>
 <body>
@@ -177,7 +182,7 @@ a {
   <h1 style="text-align: center">Temporale.</h1>
 
   <div id="options" style="text-align: center">
-    <label for="selectMass">Feast:</label>
+    <label for="selectMass">Festum:</label>
     <select id="selectMass" onchange="clearAll()">
       <option value="00"></option>
       <option value="01">Dominica j. adventus Domini.</option>
@@ -187,6 +192,7 @@ a {
       <option value="05">In vigilia nativitatis Domini.</option>
       <option value="06">Ad missam in gallicantu.</option>
       <option value="07">Ad missam in aurora.</option>
+      <option value="21">Dominica ij. post octavas epiphanie.</option>
       <option value="23">Dominica in septuagesima.</option>
       <option value="36">In die pasche.</option>
       <option value="45">Dominica iij. post pascha.</option>
@@ -202,15 +208,15 @@ a {
       <option value="78">Dominica xvij. post octavas pentecostes.</option>
     </select>
     &nbsp||&nbsp&nbspAspersionem aquam: <input type="checkbox" id="beneCheck">
-    &nbsp||&nbsp&nbspKyriale: <input type="checkbox" id="kyCheck">
+    &nbsp||&nbsp&nbspOrdinarium: <input type="checkbox" id="kyCheck">
     &nbsp||&nbsp&nbsp<button type="button" onclick="loadMass()">Update</button>
   </div>
 
-  <h1 id="massName"></h1>
+  <a id="pdfLink" target="_blank"><h2 id="massName"></h2></a>
 
   <div class="chantDiv" style="display:none" id="beneDiv"><img id="beneSvg" src="" width=620px></div>
   <div class="chantDiv" style="display:none" id="offcDiv"><img id="offcSvg" src="" width=620px></div>
-  <div class="chantDiv" style="display:none" id="offcTonesDiv"><a href="./temporale/offic-tones.pdf" target="_blank">Gloria Patri ad officium.</a></div>
+  <div class="offcTonesDiv" style="display:none" id="offcTones"><a href="./temporale/offic-tones.pdf" target="_blank">Gloria Patri ad officium.</a></div>
   <div class="chantDiv" style="display:none" id="kyrieDiv"><img id="kyrieSvg" src="" width=620px></div>
   <div class="chantDiv" style="display:none" id="gloriaDiv"><img id="gloriaSvg" src="" width=620px></div>
   <div class="chantDiv" style="display:none" id="gastDiv"><img id="gastSvg" src="" width=620px></div>
@@ -238,6 +244,7 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
   function clearAll() {
 
     title = document.getElementById("massName").innerHTML = "";
+    document.getElementById("pdfLink").setAttribute("href", "");
 
     document.getElementById("beneSvg").src = "";
     document.getElementById("beneDiv").style = "display:none";
@@ -245,7 +252,7 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
     document.getElementById("offcSvg").src = "";
     document.getElementById("offcDiv").style = "display:none";
 
-    document.getElementById("offcTonesDiv").style = "display:none";
+    document.getElementById("offcTones").style = "display:none";
 
     document.getElementById("kyrieSvg").src = "";
     document.getElementById("kyrieDiv").style = "display:none";
@@ -278,6 +285,9 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
   function loadMass() {
 
     var mass = document.getElementById("selectMass").value;
+
+    // title link to pdf
+    document.getElementById("pdfLink").setAttribute("href", "./temporale/" + mass + "/" + mass + ".pdf");
 
     // Benediction
 
@@ -437,7 +447,7 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
       document.getElementById("offcSvg").src = "./temporale/" + mass + "/offc.svg";
       document.getElementById("offcDiv").style = "display:block; text-align:center";
 
-      document.getElementById("offcTonesDiv").style = "display:block; text-align:center";
+      document.getElementById("offcTones").style = "display:block; text-align:center";
 
       // G-radual A-lleluya S-equence T-ract
       document.getElementById("gastSvg").src = "./temporale/" + mass + "/gast.svg";
