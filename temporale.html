@@ -182,30 +182,32 @@ a {
   <h1 style="text-align: center">Temporale.</h1>
 
   <div id="options" style="text-align: center">
-    <label for="selectMass">Festum:</label>
+    <label for="selectMass">Dominica</label>
     <select id="selectMass" onchange="clearAll()">
       <option value="00"></option>
-      <option value="01">Dominica j. adventus Domini.</option>
-      <option value="02">Dominica ij. adventus Domini.</option>
-      <option value="03">Dominica iij. adventus Domini.</option>
-      <option value="04">Dominica iiij. adventus Domini.</option>
-      <option value="05">In vigilia nativitatis Domini.</option>
-      <option value="06">Ad missam in gallicantu.</option>
-      <option value="07">Ad missam in aurora.</option>
-      <option value="21">Dominica ij. post octavas epiphanie.</option>
-      <option value="23">Dominica in septuagesima.</option>
-      <option value="36">In die pasche.</option>
-      <option value="45">Dominica iij. post pascha.</option>
-      <option value="46">Dominica iiij. post pascha.</option>
-      <option value="47">Dominica v. post pascha.</option>
-      <option value="51">Dominica infra octavas ascensionis.</option>
-      <option value="53">In die pentecostes.</option>
-      <option value="72">Dominica xj. post octavas pentecostes.</option>
-      <option value="74">Dominica xiij. post octavas pentecostes.</option>
-      <option value="75">Dominica xiiij. post octavas pentecostes.</option>
-      <option value="76">Dominica xv. post octavas pentecostes.</option>
-      <option value="77">Dominica xvj. post octavas pentecostes.</option>
-      <option value="78">Dominica xvij. post octavas pentecostes.</option>
+      <option value="01">j. adventus Domini.</option>
+      <option value="02">ij. adventus Domini.</option>
+      <option value="03">iij. adventus Domini.</option>
+      <option value="04">iiij. adventus Domini.</option>
+      <option value="05">in vigilia nativitatis Domini.</option>
+      <option value="06">ad missam in gallicantu.</option>
+      <option value="07">ad missam in aurora.</option>
+      <option value="21">ij. post octavas epiphanie.</option>
+      <option value="23">in septuagesima.</option>
+      <option value="36">in die pasche.</option>
+      <option value="45">iij. post pascha.</option>
+      <option value="46">iiij. post pascha.</option>
+      <option value="47">v. post pascha.</option>
+      <option value="51">infra octavas ascensionis.</option>
+      <option value="53">in die pentecostes.</option>
+      <option value="72">xj. post octavas pentecostes.</option>
+      <option value="74">xiij. post octavas pentecostes.</option>
+      <option value="75">xiiij. post octavas pentecostes.</option>
+      <option value="76">xv. post octavas pentecostes.</option>
+      <option value="77">xvj. post octavas pentecostes.</option>
+      <option value="78">xvij. post octavas pentecostes.</option>
+      <option value="79">xviij. post octavas pentecostes.</option>
+      <option value="80">xix. post octavas pentecostes.</option>
     </select>
     &nbsp||&nbsp&nbspAspersionem aquam: <input type="checkbox" id="beneCheck">
     &nbsp||&nbsp&nbspOrdinarium: <input type="checkbox" id="kyCheck">
@@ -243,7 +245,7 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
 
   function clearAll() {
 
-    title = document.getElementById("massName").innerHTML = "";
+    document.getElementById("massName").innerHTML = "";
     document.getElementById("pdfLink").setAttribute("href", "");
 
     document.getElementById("beneSvg").src = "";
@@ -441,7 +443,7 @@ Copyright &#169 Brandon Wild MMXXI.<span style="float: right;"><a href="#top">To
     if (mass != "00") {
 
       var select = document.getElementById("selectMass");
-      document.getElementById("massName").innerHTML = select.options[select.selectedIndex].innerHTML;
+      document.getElementById("massName").innerHTML = "Dominica " + select.options[select.selectedIndex].innerHTML;
 
       // Officium
       document.getElementById("offcSvg").src = "./temporale/" + mass + "/offc.svg";
